@@ -14,7 +14,7 @@
       "@components/*": ["./src/components/*"],
       "@constants/*": ["./src/constants/*"],
       "@screens/*": ["./src/screens/*"],
-      "@state/*": ["./src/state/*"]
+      "@store/*": ["./src/store/*"]
     }
   },
   "exclude": ["__tests__/**/*-test.ts"]
