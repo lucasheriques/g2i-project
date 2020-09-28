@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Headline, Subheading } from "react-native-paper";
 
-import { RootStackList } from "../constants/types";
+import { RootStackList } from "../../constants/types";
 
 type Props = {
   navigation: StackNavigationProp<RootStackList, "Home">;

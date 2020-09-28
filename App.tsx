@@ -1,9 +1,9 @@
 import { RootStackList as StackRouteList } from "@constants/types";
+import FinishScreen from "@features/finishScreen/finishScreen";
+import HomeScreen from "@features/homeScreen/homeScreen";
+import QuizScreen from "@features/quizScreen/quizScreen";
 import { NavigationContainer, StackRouter } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import FinishScreen from "@screens/FinishScreen";
-import HomeScreen from "@screens/HomeScreen";
-import QuizScreen from "@screens/QuizScreen";
 import store from "@store/store";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
@@ -11,9 +11,6 @@ import { Provider as PaperProvider } from "react-native-paper";
 import { Provider } from "react-redux";
 
 export default function App() {
-  if (__DEV__) {
-    import("./ReactotronConfig");
-  }
   const Stack = createStackNavigator<StackRouteList>();
   return (
     <Provider store={store}>
