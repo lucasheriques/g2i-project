@@ -17,13 +17,14 @@ export default function App() {
       <NavigationContainer>
         <PaperProvider>
           <StatusBar style="auto" />
-          <Stack.Navigator
-            initialRouteName="Home"
-            screenOptions={{ headerShown: false }}
-          >
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Quiz" component={QuizScreen} />
-            <Stack.Screen name="Finish" component={FinishScreen} />
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Home"
+              component={HomeScreen}
+            />
+            <Stack.Screen name="Trivia Quiz Challenge" component={QuizScreen} />
+            <Stack.Screen name="Result" component={FinishScreen} />
           </Stack.Navigator>
         </PaperProvider>
       </NavigationContainer>

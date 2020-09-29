@@ -20,7 +20,9 @@ export default function HomeScreen({ navigation }: Props) {
       <Button
         icon="camera"
         mode="contained"
-        onPress={() => navigation.navigate("Quiz")}
+        onPress={() => {
+          navigation.navigate("Trivia Quiz Challenge");
+        }}
       >
         Begin
       </Button>

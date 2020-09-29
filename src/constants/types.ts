@@ -1,7 +1,7 @@
 export type RootStackList = {
   Home: undefined;
-  Quiz: undefined;
-  Finish: undefined;
+  "Trivia Quiz Challenge": undefined;
+  Result: undefined;
 };
 
 export type Question = {
