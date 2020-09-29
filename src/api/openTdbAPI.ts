@@ -19,6 +19,6 @@ interface Payload {
 
 export async function getQuestions() {
   const { data } = await Axios.get<Payload>(url);
-  console.log(data);
+
   return data.results;
 }

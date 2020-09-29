@@ -1,3 +1,4 @@
+import Question from "@components/Question";
 import { RootState } from "@store/rootReducer";
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -9,15 +10,18 @@ import { fetchQuestions } from "./quizSlice";
 export default function QuizScreen() {
   const dispatch = useDispatch();
 
-  const questionsList = useSelector(
-    (state: RootState) => state.quiz.questionList
-  );
+  const {
+    currentQuestion,
+    error,
+    isLoading,
+    rightQuestions,
+    wrongQuestions,
+    questionList,
+  } = useSelector((state: RootState) => state.quiz);
 
   useEffect(() => {
     dispatch(fetchQuestions());
-  });
-
-  console.log(questionsList);
+  }, []);
 
   return (
     <View style={styles.container}>
