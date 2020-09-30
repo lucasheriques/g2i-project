@@ -5,11 +5,11 @@ import { Button, Headline, Subheading } from "react-native-paper";
 
 import { RootStackList } from "../../constants/types";
 
-type Props = {
+type HSProps = {
   navigation: StackNavigationProp<RootStackList, "Home">;
 };
 
-export default function HomeScreen({ navigation }: Props) {
+export default function HomeScreen({ navigation }: HSProps) {
   return (
     <View style={styles.container}>
       <Headline>Welcome to the Trivia Challenge!</Headline>

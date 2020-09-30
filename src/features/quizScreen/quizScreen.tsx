@@ -1,19 +1,18 @@
-import QuestionComponent from "@components/Question";
+import QuestionComponent from "@components/questionComponent";
+import { RootStackList } from "@constants/types";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import {
-  ActivityIndicator,
-  Button,
-  Headline,
-  ProgressBar,
-  Subheading,
-} from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchQuestions, nextQuestion } from "./quizSlice";
 
-export default function QuizScreen() {
+type QSProps = {
+  navigation: StackNavigationProp<RootStackList, "Trivia Quiz Challenge">;
+};
+
+export default function QuizScreen({ navigation }: QSProps) {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
 
@@ -23,6 +22,10 @@ export default function QuizScreen() {
 
   const handleNext = () => {
     dispatch(nextQuestion(value === "correct"));
+  };
+
+  const computeResults = () => {
+    navigation.navigate("Result");
   };
 
   useEffect(() => {
@@ -40,11 +43,14 @@ export default function QuizScreen() {
         nextQuestion={handleNext}
         value={value}
         setValue={setValue}
+        computeResults={computeResults}
       />
 
-      <Text>
-        {currentQuestionId + 1} of {questionList.length}
-      </Text>
+      {isLoading || (
+        <Text>
+          {currentQuestionId + 1} of {questionList.length}
+        </Text>
+      )}
     </View>
   );
 }

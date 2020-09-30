@@ -1,14 +1,24 @@
 import { RootStackList as StackRouteList } from "@constants/types";
-import FinishScreen from "@features/finishScreen/finishScreen";
 import HomeScreen from "@features/homeScreen/homeScreen";
 import QuizScreen from "@features/quizScreen/quizScreen";
+import ResultScreen from "@features/resultScreen/resultScreen";
 import { NavigationContainer, StackRouter } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from "@react-navigation/stack";
 import store from "@store/store";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import { Provider } from "react-redux";
+
+/*
+options={({ navigation, route }) => ({
+          headerLeft: <HeaderBackButton onPress={()=>{navigation.navigate('Home')}}
+        })}*
+
+        */
 
 export default function App() {
   const Stack = createStackNavigator<StackRouteList>();
@@ -24,7 +34,20 @@ export default function App() {
               component={HomeScreen}
             />
             <Stack.Screen name="Trivia Quiz Challenge" component={QuizScreen} />
-            <Stack.Screen name="Result" component={FinishScreen} />
+            <Stack.Screen
+              name="Result"
+              component={ResultScreen}
+              options={({ navigation, route }) => ({
+                headerLeft: (props) => (
+                  <HeaderBackButton
+                    {...props}
+                    onPress={() => {
+                      navigation.reset({ routes: [{ name: "Home" }] });
+                    }}
+                  />
+                ),
+              })}
+            />
           </Stack.Navigator>
         </PaperProvider>
       </NavigationContainer>

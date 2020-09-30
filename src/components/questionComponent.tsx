@@ -15,8 +15,9 @@ interface QCProps {
   isLoading: boolean;
   lastQuestion: boolean;
   nextQuestion: any;
-  value: any;
+  value: string;
   setValue: any;
+  computeResults: () => void;
 }
 
 export default function QuestionComponent({
@@ -26,6 +27,7 @@ export default function QuestionComponent({
   nextQuestion,
   value,
   setValue,
+  computeResults,
 }: QCProps) {
   useEffect(() => {
     answers = shuffleArray(answers);
@@ -74,8 +76,9 @@ export default function QuestionComponent({
           style={styles.fab}
           icon={lastQuestion ? "check" : "share"}
           onPress={() => {
-            console.log("aaa");
-            nextQuestion();
+            setValue("");
+            if (lastQuestion) computeResults();
+            else nextQuestion();
           }}
         />
       </>

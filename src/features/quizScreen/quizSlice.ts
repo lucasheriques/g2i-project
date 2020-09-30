@@ -29,6 +29,9 @@ const quizSlice = createSlice({
   name: "quiz",
   initialState,
   reducers: {
+    reset() {
+      return initialState;
+    },
     getQuestionsStart(state) {
       state.isLoading = true;
     },
@@ -36,10 +39,8 @@ const quizSlice = createSlice({
       state.isLoading = false;
       state.questionList = action.payload;
       state.currentQuestionId = 0;
-      state.rightQuestions = [];
-      state.wrongQuestions = [];
     },
-    getQuestionsFailed(state, action: PayloadAction<Question[]>) {
+    getQuestionsFailed(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.questionList = [];
     },
@@ -55,6 +56,7 @@ const quizSlice = createSlice({
 });
 
 export const {
+  reset,
   getQuestionsStart,
   getQuestionsSuccess,
   getQuestionsFailed,
@@ -65,10 +67,11 @@ export default quizSlice.reducer;
 
 export const fetchQuestions = (): AppThunk => async (dispatch) => {
   try {
+    dispatch(reset());
     dispatch(getQuestionsStart());
     const questionList = await getQuestions();
     dispatch(getQuestionsSuccess(questionList));
   } catch (err) {
-    dispatch(getQuestionsFailed([]));
+    dispatch(getQuestionsFailed(err));
   }
 };
