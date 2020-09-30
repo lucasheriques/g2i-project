@@ -28,10 +28,13 @@ export default function QuizScreen() {
     <View style={styles.container}>
       <QuestionComponent
         question={questionList[currentQuestionId]}
+        lastQuestion={currentQuestionId === questionList.length - 1}
         isLoading={isLoading}
       />
 
-      <Text>1 of 10</Text>
+      <Text>
+        {currentQuestionId + 1} of {questionList.length}
+      </Text>
     </View>
   );
 }
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     textAlign: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     padding: 32,
   },
 });

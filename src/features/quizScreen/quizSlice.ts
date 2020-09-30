@@ -54,6 +54,7 @@ export const {
 } = quizSlice.actions;
 
 export default quizSlice.reducer;
+
 export const fetchQuestions = (): AppThunk => async (dispatch) => {
   try {
     dispatch(getQuestionsStart());
