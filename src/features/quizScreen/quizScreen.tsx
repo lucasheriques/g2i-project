@@ -1,6 +1,6 @@
 import QuestionComponent from "@components/Question";
 import { RootState } from "@store/rootReducer";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import {
   ActivityIndicator,
@@ -11,18 +11,25 @@ import {
 } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchQuestions } from "./quizSlice";
+import { fetchQuestions, nextQuestion } from "./quizSlice";
 
 export default function QuizScreen() {
   const dispatch = useDispatch();
+  const [value, setValue] = useState("");
 
   const { currentQuestionId, error, isLoading, questionList } = useSelector(
     (state: RootState) => state.quiz
   );
 
+  const handleNext = () => {
+    dispatch(nextQuestion(value === "correct"));
+  };
+
   useEffect(() => {
     dispatch(fetchQuestions());
   }, []);
+
+  console.log(value);
 
   return (
     <View style={styles.container}>
@@ -30,6 +37,9 @@ export default function QuizScreen() {
         question={questionList[currentQuestionId]}
         lastQuestion={currentQuestionId === questionList.length - 1}
         isLoading={isLoading}
+        nextQuestion={handleNext}
+        value={value}
+        setValue={setValue}
       />
 
       <Text>

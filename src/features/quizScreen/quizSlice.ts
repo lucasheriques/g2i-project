@@ -12,7 +12,7 @@ interface Quiz {
 type QuizState = {
   isLoading: boolean;
   error: string;
-  score: number | null;
+  score: number;
 } & Quiz;
 
 const initialState: QuizState = {
@@ -22,7 +22,7 @@ const initialState: QuizState = {
   questionList: [],
   rightQuestions: [],
   wrongQuestions: [],
-  score: null,
+  score: 0,
 };
 
 const quizSlice = createSlice({
@@ -36,12 +36,19 @@ const quizSlice = createSlice({
       state.isLoading = false;
       state.questionList = action.payload;
       state.currentQuestionId = 0;
+      state.rightQuestions = [];
+      state.wrongQuestions = [];
     },
     getQuestionsFailed(state, action: PayloadAction<Question[]>) {
       state.isLoading = false;
       state.questionList = [];
     },
     nextQuestion(state, action: PayloadAction<boolean>) {
+      if (action.payload) {
+        state.rightQuestions.push(state.currentQuestionId);
+        state.score += 1;
+      } else state.wrongQuestions.push(state.currentQuestionId);
+
       state.currentQuestionId += 1;
     },
   },
@@ -51,6 +58,7 @@ export const {
   getQuestionsStart,
   getQuestionsSuccess,
   getQuestionsFailed,
+  nextQuestion,
 } = quizSlice.actions;
 
 export default quizSlice.reducer;

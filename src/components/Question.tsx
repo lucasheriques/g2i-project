@@ -1,31 +1,32 @@
 import { Question } from "@constants/types";
+import { Html5Entities } from "html-entities";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   ActivityIndicator,
-  Button,
   Card,
   FAB,
-  Headline,
   Paragraph,
   RadioButton,
-  Subheading,
-  Title,
 } from "react-native-paper";
 
 interface QCProps {
   question: Question;
   isLoading: boolean;
   lastQuestion: boolean;
+  nextQuestion: any;
+  value: any;
+  setValue: any;
 }
 
 export default function QuestionComponent({
   question,
   lastQuestion,
   isLoading,
+  nextQuestion,
+  value,
+  setValue,
 }: QCProps) {
-  const [value, setValue] = useState("");
-
   useEffect(() => {
     answers = shuffleArray(answers);
   }, [question?.correct_answer]);
@@ -60,7 +61,7 @@ export default function QuestionComponent({
       <>
         <Card style={styles.card}>
           <Card.Content style={styles.cardContent}>
-            <Paragraph>{question?.question}</Paragraph>
+            <Paragraph>{Html5Entities.decode(question?.question)}</Paragraph>
             <RadioButton.Group
               onValueChange={(value) => setValue(value)}
               value={value}
@@ -72,7 +73,10 @@ export default function QuestionComponent({
         <FAB
           style={styles.fab}
           icon={lastQuestion ? "check" : "share"}
-          onPress={() => console.log("Pressed")}
+          onPress={() => {
+            console.log("aaa");
+            nextQuestion();
+          }}
         />
       </>
     );
