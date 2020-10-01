@@ -39,10 +39,12 @@ export default function QuestionComponent({
       key={question?.incorrect_answers[0]}
       label={question?.incorrect_answers[0]}
       value="F"
+      labelStyle={styles.answer}
     />,
     <RadioButton.Item
       key={question?.correct_answer}
       label={question?.correct_answer}
+      labelStyle={styles.answer}
       value="T"
     />,
   ];
@@ -53,7 +55,9 @@ export default function QuestionComponent({
     <>
       <Card style={styles.card}>
         <Card.Content style={styles.cardContent}>
-          <Paragraph>{Html5Entities.decode(question?.question)}</Paragraph>
+          <Paragraph style={styles.question}>
+            {Html5Entities.decode(question?.question)}
+          </Paragraph>
           <RadioButton.Group
             onValueChange={(value) => setValue(value)}
             value={value}
@@ -73,5 +77,13 @@ const styles = StyleSheet.create({
   cardContent: {
     display: "flex",
     alignContent: "flex-end",
+  },
+  answer: {
+    fontSize: 16,
+    color: "#52606D",
+  },
+  question: {
+    fontSize: 16,
+    color: "#52606D",
   },
 });

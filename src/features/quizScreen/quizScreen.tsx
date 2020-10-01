@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
   Button,
   FAB,
-  Headline,
+  Headline as Title,
   ProgressBar,
 } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,9 +47,9 @@ export default function QuizScreen({ navigation }: QSProps) {
         <ActivityIndicator size="large" />
       ) : (
         <>
-          <Headline style={styles.title}>
+          <Title style={styles.title}>
             Question {currentQuestionId + 1} of {questionList.length}
-          </Headline>
+          </Title>
           <ProgressBar
             progress={(currentQuestionId + 1) / questionList.length}
             style={styles.progressBar}
@@ -90,12 +90,12 @@ const styles = StyleSheet.create({
     padding: 32,
   },
   title: {
-    marginBottom: 16,
+    marginBottom: 24,
   },
   progressBar: {
-    marginBottom: 16,
+    marginBottom: 24,
   },
   fab: {
-    margin: 16,
+    margin: 24,
   },
 });
