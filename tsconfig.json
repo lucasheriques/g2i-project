@@ -11,7 +11,7 @@
     "strict": true,
     "paths": {
       "@api/*": ["./src/api/*"],
-      "@assets/*": ["./assets"],
+      "@assets/*": ["./assets/*"],
       "@components/*": ["./src/components/*"],
       "@constants/*": ["./src/constants/*"],
       "@features/*": ["src/features/*"],

@@ -1,14 +1,7 @@
 import { StackNavigationProp } from "@react-navigation/stack";
-import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import {
-  Button,
-  Headline,
-  Subheading,
-  Text as Headng,
-} from "react-native-paper";
-import Svg, { Circle, Path } from "react-native-svg";
+import { Button, Headline, Subheading } from "react-native-paper";
 
 import { RootStackList } from "../../constants/types";
 
@@ -18,10 +11,7 @@ type HSProps = {
 
 export default function HomeScreen({ navigation }: HSProps) {
   return (
-    <LinearGradient
-      colors={["#19216C", "#35469C", "#4C63B6"]}
-      style={styles.curvedBackground}
-    >
+    <View style={styles.container}>
       <Headline style={styles.title}>Trivia Challenge</Headline>
       <Subheading style={styles.subtitle}>
         10 True or False questions! Let's test your trivia knowledge!
@@ -37,7 +27,7 @@ export default function HomeScreen({ navigation }: HSProps) {
       >
         Begin
       </Button>
-    </LinearGradient>
+    </View>
   );
 }
 
@@ -53,11 +43,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "space-evenly",
   },
-  title: {
-    color: "#fff",
-  },
+  title: {},
   subtitle: {
-    color: "#fff",
     textAlign: "center",
   },
   curvedBackground: {

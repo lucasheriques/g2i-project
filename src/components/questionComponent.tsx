@@ -1,15 +1,9 @@
 import { Question } from "@constants/types";
 import { shuffleArray } from "@utils/arrays";
 import { Html5Entities } from "html-entities";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
-import {
-  ActivityIndicator,
-  Card,
-  FAB,
-  Paragraph,
-  RadioButton,
-} from "react-native-paper";
+import { Card, Paragraph, RadioButton } from "react-native-paper";
 
 interface QCProps {
   question: Question;
