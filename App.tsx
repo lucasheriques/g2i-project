@@ -10,17 +10,35 @@ import {
 import store from "@store/store";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Provider as PaperProvider } from "react-native-paper";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { Provider } from "react-redux";
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "#19216C",
+    accent: "#841003",
+    text: "#3E4C59",
+  },
+};
 
 export default function App() {
   const Stack = createStackNavigator<StackRouteList>();
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <PaperProvider>
+        <PaperProvider theme={theme}>
           <StatusBar style="auto" />
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: "#19216C",
+              },
+              headerTintColor: "#fff",
+            }}
+          >
             <Stack.Screen
               options={{ headerShown: false }}
               name="Home"

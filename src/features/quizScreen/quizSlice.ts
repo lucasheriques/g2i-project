@@ -51,7 +51,8 @@ const quizSlice = createSlice({
         state.score += 1;
       }
 
-      state.currentQuestionId += 1;
+      if (state.currentQuestionId < state.questionList.length)
+        state.currentQuestionId += 1;
     },
   },
 });

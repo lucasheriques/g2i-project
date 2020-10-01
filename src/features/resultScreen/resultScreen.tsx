@@ -49,7 +49,7 @@ export default function ResultScreen({ navigation }: RSProps) {
             left={(props) => (
               <List.Icon
                 {...props}
-                color={checkAnswer(index) ? "#199473" : "#BA2525"}
+                color={checkAnswer(index) ? "#18981D" : "#C52707"}
                 icon={checkAnswer(index) ? "check" : "close"}
               />
             )}
@@ -78,6 +78,8 @@ const styles = StyleSheet.create({
   listTitle: {
     fontSize: 24,
     textAlign: "center",
+    fontWeight: "bold",
+    color: "#3E4C59",
   },
   listSection: {
     minWidth: "100%",

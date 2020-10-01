@@ -38,16 +38,16 @@ export default function QuestionComponent({
     <RadioButton.Item
       key={question?.incorrect_answers[0]}
       label={question?.incorrect_answers[0]}
-      value="incorrect"
-      uncheckedColor="#fff"
+      value="F"
     />,
     <RadioButton.Item
       key={question?.correct_answer}
       label={question?.correct_answer}
-      value="correct"
-      uncheckedColor="#fff"
+      value="T"
     />,
   ];
+
+  console.log(value);
 
   return (
     <>
@@ -62,29 +62,13 @@ export default function QuestionComponent({
           </RadioButton.Group>
         </Card.Content>
       </Card>
-      <FAB
-        style={styles.fab}
-        icon={lastQuestion ? "check" : "share"}
-        onPress={() => {
-          setValue("");
-          if (lastQuestion) computeResults();
-          else nextQuestion();
-        }}
-      />
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  fab: {
-    position: "absolute",
-    margin: 16,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "#5467fc",
-  },
   card: {
-    maxHeight: "50%",
+    maxHeight: "60%",
   },
   cardContent: {
     display: "flex",

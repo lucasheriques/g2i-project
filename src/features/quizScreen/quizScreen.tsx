@@ -4,7 +4,13 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ActivityIndicator, Headline, ProgressBar } from "react-native-paper";
+import {
+  ActivityIndicator,
+  Button,
+  FAB,
+  Headline,
+  ProgressBar,
+} from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchQuestions, nextQuestion } from "./quizSlice";
@@ -22,7 +28,7 @@ export default function QuizScreen({ navigation }: QSProps) {
   );
 
   const handleNext = () => {
-    dispatch(nextQuestion(value === "correct"));
+    dispatch(nextQuestion(value === "T"));
   };
 
   const computeResults = () => {
@@ -33,17 +39,20 @@ export default function QuizScreen({ navigation }: QSProps) {
     dispatch(fetchQuestions());
   }, []);
 
+  const lastQuestion = currentQuestionId === questionList.length - 1;
+
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator size="large" />
       ) : (
         <>
-          <Headline>
+          <Headline style={styles.title}>
             Question {currentQuestionId + 1} of {questionList.length}
           </Headline>
           <ProgressBar
             progress={(currentQuestionId + 1) / questionList.length}
+            style={styles.progressBar}
           />
           <QuestionComponent
             question={questionList[currentQuestionId]}
@@ -54,6 +63,19 @@ export default function QuizScreen({ navigation }: QSProps) {
             setValue={setValue}
             computeResults={computeResults}
           />
+          <Button
+            style={styles.fab}
+            disabled={value === ""}
+            mode="contained"
+            icon={lastQuestion ? "check" : "share"}
+            onPress={() => {
+              setValue("");
+              handleNext();
+              if (lastQuestion) computeResults();
+            }}
+          >
+            {lastQuestion ? "Finish" : "Continue"}
+          </Button>
         </>
       )}
     </View>
@@ -63,8 +85,17 @@ export default function QuizScreen({ navigation }: QSProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F5F7FA",
     textAlign: "center",
     padding: 32,
+  },
+  title: {
+    marginBottom: 16,
+  },
+  progressBar: {
+    marginBottom: 16,
+  },
+  fab: {
+    margin: 16,
   },
 });
