@@ -2,9 +2,10 @@ import { RootStackList } from "@constants/types";
 import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
+import { Html5Entities } from "html-entities";
 import React from "react";
-import { BackHandler, StyleSheet, Text, View } from "react-native";
-import { Button, Headline, Subheading } from "react-native-paper";
+import { BackHandler, StyleSheet, Text, ScrollView } from "react-native";
+import { Button, Headline, List, Subheading } from "react-native-paper";
 import { useSelector } from "react-redux";
 
 type RSProps = {
@@ -12,7 +13,7 @@ type RSProps = {
 };
 
 export default function ResultScreen({ navigation }: RSProps) {
-  const { score, rightQuestions, wrongQuestions, questionList } = useSelector(
+  const { score, correctAnswers, questionList } = useSelector(
     (state: RootState) => state.quiz
   );
 
@@ -30,14 +31,40 @@ export default function ResultScreen({ navigation }: RSProps) {
     }, [])
   );
 
-  return (
-    <View style={styles.container}>
-      <Headline>You scored {score}/10!</Headline>
+  const checkAnswer = (questionId: number): boolean =>
+    correctAnswers[questionId];
 
-      {questionList.map((question, index) => (
-        <Text>{question.question}</Text>
-      ))}
-    </View>
+  return (
+    <ScrollView style={styles.container}>
+      <List.Section
+        title={`You scored ${score}/10!`}
+        titleStyle={styles.listTitle}
+        style={styles.listSection}
+      >
+        {questionList.map((question, index) => (
+          <List.Item
+            key={index}
+            title={`Question 0${index + 1}`}
+            description={Html5Entities.decode(question.question)}
+            left={(props) => (
+              <List.Icon
+                {...props}
+                color={checkAnswer(index) ? "#199473" : "#BA2525"}
+                icon={checkAnswer(index) ? "check" : "close"}
+              />
+            )}
+          />
+        ))}
+        <Button
+          icon="redo-variant"
+          mode="contained"
+          onPress={() => navigation.navigate("Home")}
+          style={styles.tryAgainButton}
+        >
+          Try again!
+        </Button>
+      </List.Section>
+    </ScrollView>
   );
 }
 
@@ -45,9 +72,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
     textAlign: "center",
-    justifyContent: "space-between",
-    padding: 32,
+    padding: 16,
+  },
+  listTitle: {
+    fontSize: 24,
+    textAlign: "center",
+  },
+  listSection: {
+    minWidth: "100%",
+  },
+  tryAgainButton: {
+    marginBottom: 32,
   },
 });

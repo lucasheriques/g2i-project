@@ -1,4 +1,5 @@
 import { Question } from "@constants/types";
+import { shuffleArray } from "@utils/arrays";
 import { Html5Entities } from "html-entities";
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
@@ -33,15 +34,6 @@ export default function QuestionComponent({
     answers = shuffleArray(answers);
   }, [question?.correct_answer]);
 
-  function shuffleArray<T>(array: T[]): T[] {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-
-    return array;
-  }
-
   let answers = [
     <RadioButton.Item
       key={question?.incorrect_answers[0]}
@@ -57,34 +49,30 @@ export default function QuestionComponent({
     />,
   ];
 
-  const renderQuestion = () => {
-    if (isLoading) return undefined;
-    return (
-      <>
-        <Card style={styles.card}>
-          <Card.Content style={styles.cardContent}>
-            <Paragraph>{Html5Entities.decode(question?.question)}</Paragraph>
-            <RadioButton.Group
-              onValueChange={(value) => setValue(value)}
-              value={value}
-            >
-              {answers.map((answer) => answer)}
-            </RadioButton.Group>
-          </Card.Content>
-        </Card>
-        <FAB
-          style={styles.fab}
-          icon={lastQuestion ? "check" : "share"}
-          onPress={() => {
-            setValue("");
-            if (lastQuestion) computeResults();
-            else nextQuestion();
-          }}
-        />
-      </>
-    );
-  };
-  return <>{renderQuestion() ?? <ActivityIndicator />}</>;
+  return (
+    <>
+      <Card style={styles.card}>
+        <Card.Content style={styles.cardContent}>
+          <Paragraph>{Html5Entities.decode(question?.question)}</Paragraph>
+          <RadioButton.Group
+            onValueChange={(value) => setValue(value)}
+            value={value}
+          >
+            {answers.map((answer) => answer)}
+          </RadioButton.Group>
+        </Card.Content>
+      </Card>
+      <FAB
+        style={styles.fab}
+        icon={lastQuestion ? "check" : "share"}
+        onPress={() => {
+          setValue("");
+          if (lastQuestion) computeResults();
+          else nextQuestion();
+        }}
+      />
+    </>
+  );
 }
 
 const styles = StyleSheet.create({

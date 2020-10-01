@@ -5,8 +5,7 @@ import { AppThunk } from "@store/store";
 interface Quiz {
   questionList: Question[];
   currentQuestionId: number;
-  rightQuestions: number[];
-  wrongQuestions: number[];
+  correctAnswers: { [questionId: number]: boolean };
 }
 
 type QuizState = {
@@ -20,8 +19,7 @@ const initialState: QuizState = {
   error: "",
   isLoading: false,
   questionList: [],
-  rightQuestions: [],
-  wrongQuestions: [],
+  correctAnswers: {},
   score: 0,
 };
 
@@ -46,9 +44,12 @@ const quizSlice = createSlice({
     },
     nextQuestion(state, action: PayloadAction<boolean>) {
       if (action.payload) {
-        state.rightQuestions.push(state.currentQuestionId);
+        state.correctAnswers = {
+          ...state.correctAnswers,
+          [state.currentQuestionId]: true,
+        };
         state.score += 1;
-      } else state.wrongQuestions.push(state.currentQuestionId);
+      }
 
       state.currentQuestionId += 1;
     },

@@ -13,13 +13,6 @@ import React from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import { Provider } from "react-redux";
 
-/*
-options={({ navigation, route }) => ({
-          headerLeft: <HeaderBackButton onPress={()=>{navigation.navigate('Home')}}
-        })}*
-
-        */
-
 export default function App() {
   const Stack = createStackNavigator<StackRouteList>();
   return (

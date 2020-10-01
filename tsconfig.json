@@ -11,10 +11,12 @@
     "strict": true,
     "paths": {
       "@api/*": ["./src/api/*"],
+      "@assets/*": ["./assets"],
       "@components/*": ["./src/components/*"],
       "@constants/*": ["./src/constants/*"],
       "@features/*": ["src/features/*"],
-      "@store/*": ["./src/store/*"]
+      "@store/*": ["./src/store/*"],
+      "@utils/*": ["src/utils/*/*"]
     }
   },
   "exclude": ["__tests__/**/*-test.ts"]

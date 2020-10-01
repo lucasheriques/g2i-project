@@ -4,6 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Headline, ProgressBar } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchQuestions, nextQuestion } from "./quizSlice";
@@ -32,24 +33,28 @@ export default function QuizScreen({ navigation }: QSProps) {
     dispatch(fetchQuestions());
   }, []);
 
-  console.log(value);
-
   return (
     <View style={styles.container}>
-      <QuestionComponent
-        question={questionList[currentQuestionId]}
-        lastQuestion={currentQuestionId === questionList.length - 1}
-        isLoading={isLoading}
-        nextQuestion={handleNext}
-        value={value}
-        setValue={setValue}
-        computeResults={computeResults}
-      />
-
-      {isLoading || (
-        <Text>
-          {currentQuestionId + 1} of {questionList.length}
-        </Text>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <>
+          <Headline>
+            Question {currentQuestionId + 1} of {questionList.length}
+          </Headline>
+          <ProgressBar
+            progress={(currentQuestionId + 1) / questionList.length}
+          />
+          <QuestionComponent
+            question={questionList[currentQuestionId]}
+            lastQuestion={currentQuestionId === questionList.length - 1}
+            isLoading={isLoading}
+            nextQuestion={handleNext}
+            value={value}
+            setValue={setValue}
+            computeResults={computeResults}
+          />
+        </>
       )}
     </View>
   );
@@ -59,9 +64,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
     textAlign: "center",
-    justifyContent: "center",
     padding: 32,
   },
 });
