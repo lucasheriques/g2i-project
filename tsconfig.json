@@ -16,7 +16,7 @@
       "@constants/*": ["./src/constants/*"],
       "@features/*": ["src/features/*"],
       "@store/*": ["./src/store/*"],
-      "@utils/*": ["src/utils/*/*"]
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "exclude": ["__tests__/**/*-test.ts"]

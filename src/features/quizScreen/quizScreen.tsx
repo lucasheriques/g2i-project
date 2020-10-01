@@ -23,7 +23,7 @@ export default function QuizScreen({ navigation }: QSProps) {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
 
-  const { currentQuestionId, error, isLoading, questionList } = useSelector(
+  const { currentQuestionId, finished, isLoading, questionList } = useSelector(
     (state: RootState) => state.quiz
   );
 
@@ -36,7 +36,7 @@ export default function QuizScreen({ navigation }: QSProps) {
   };
 
   useEffect(() => {
-    dispatch(fetchQuestions());
+    if (finished) dispatch(fetchQuestions());
   }, []);
 
   const lastQuestion = currentQuestionId === questionList.length - 1;

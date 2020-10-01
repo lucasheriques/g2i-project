@@ -6,6 +6,7 @@ interface Quiz {
   questionList: Question[];
   currentQuestionId: number;
   correctAnswers: { [questionId: number]: boolean };
+  finished: boolean;
 }
 
 type QuizState = {
@@ -17,6 +18,7 @@ type QuizState = {
 const initialState: QuizState = {
   currentQuestionId: -1,
   error: "",
+  finished: true,
   isLoading: false,
   questionList: [],
   correctAnswers: {},
@@ -35,6 +37,7 @@ const quizSlice = createSlice({
     },
     getQuestionsSuccess(state, action: PayloadAction<Question[]>) {
       state.isLoading = false;
+      state.finished = false;
       state.questionList = action.payload;
       state.currentQuestionId = 0;
     },
@@ -44,15 +47,13 @@ const quizSlice = createSlice({
     },
     nextQuestion(state, action: PayloadAction<boolean>) {
       if (action.payload) {
-        state.correctAnswers = {
-          ...state.correctAnswers,
-          [state.currentQuestionId]: true,
-        };
+        state.correctAnswers[state.currentQuestionId] = true;
         state.score += 1;
       }
 
-      if (state.currentQuestionId < state.questionList.length)
+      if (state.currentQuestionId < state.questionList.length - 1)
         state.currentQuestionId += 1;
+      else state.finished = true;
     },
   },
 });
