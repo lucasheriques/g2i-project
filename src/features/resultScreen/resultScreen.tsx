@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     textAlign: "center",
     padding: 16,
+    paddingTop: 0,
   },
   listTitle: {
     fontSize: 24,

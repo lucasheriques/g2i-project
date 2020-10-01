@@ -18,28 +18,34 @@ type HSProps = {
 
 export default function HomeScreen({ navigation }: HSProps) {
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={["#19216C", "#05606E", "#647ACB"]}
-        style={styles.curvedBackground}
-      >
-        <Headline style={styles.title}>Trivia Challenge</Headline>
-        <Subheading style={styles.subtitle}>Can you score 100%?</Subheading>
-      </LinearGradient>
+    <LinearGradient
+      colors={["#19216C", "#35469C", "#4C63B6"]}
+      style={styles.curvedBackground}
+    >
+      <Headline style={styles.title}>Trivia Challenge</Headline>
+      <Subheading style={styles.subtitle}>
+        10 True or False questions! Let's test your trivia knowledge!
+      </Subheading>
+      <Subheading style={styles.subtitle}>Can you score 100%?</Subheading>
       <Button
-        icon="camera"
+        icon="pencil"
         mode="contained"
+        style={styles.beginButton}
         onPress={() => {
           navigation.navigate("Trivia Quiz Challenge");
         }}
       >
         Begin
       </Button>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  beginButton: {
+    backgroundColor: "#841003",
+    width: "90%",
+  },
   container: {
     flex: 1,
     backgroundColor: "#F5F7FA",
@@ -52,15 +58,13 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: "#fff",
+    textAlign: "center",
   },
   curvedBackground: {
     width: "100%",
-    minHeight: "75%",
-    borderBottomRightRadius: 150,
-    borderBottomLeftRadius: 150,
+    minHeight: "100%",
     color: "#fff",
-    alignContent: "center",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
   },
 });
