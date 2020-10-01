@@ -1,4 +1,5 @@
 import { StackNavigationProp } from "@react-navigation/stack";
+import LottieView from "lottie-react-native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Headline, Subheading } from "react-native-paper";
@@ -12,6 +13,7 @@ type HSProps = {
 export default function HomeScreen({ navigation }: HSProps) {
   return (
     <View style={styles.container}>
+      <LottieView source={require("@assets/socute.json")} autoPlay loop />
       <Headline style={styles.title}>Trivia Challenge</Headline>
       <Subheading style={styles.subtitle}>
         10 True or False questions! Let's test your trivia knowledge!

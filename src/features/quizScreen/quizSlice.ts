@@ -18,7 +18,7 @@ type QuizState = {
 const initialState: QuizState = {
   currentQuestionId: -1,
   error: "",
-  finished: true,
+  finished: false,
   isLoading: false,
   questionList: [],
   correctAnswers: {},

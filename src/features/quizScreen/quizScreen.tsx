@@ -56,12 +56,8 @@ export default function QuizScreen({ navigation }: QSProps) {
           />
           <QuestionComponent
             question={questionList[currentQuestionId]}
-            lastQuestion={currentQuestionId === questionList.length - 1}
-            isLoading={isLoading}
-            nextQuestion={handleNext}
             value={value}
             setValue={setValue}
-            computeResults={computeResults}
           />
           <Button
             style={styles.fab}
