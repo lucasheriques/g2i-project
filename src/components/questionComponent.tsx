@@ -43,8 +43,6 @@ export default function QuestionComponent({
     />,
   ];
 
-  console.log(value);
-
   return (
     <>
       <Card style={styles.card}>
