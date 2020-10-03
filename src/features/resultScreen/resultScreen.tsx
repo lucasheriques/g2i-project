@@ -61,7 +61,7 @@ export default function ResultScreen({ navigation }: RSProps) {
           onPress={() => navigation.navigate("Home")}
           style={styles.tryAgainButton}
         >
-          Try again!
+          Play again!
         </Button>
       </List.Section>
     </ScrollView>

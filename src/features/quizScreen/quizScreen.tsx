@@ -7,7 +7,6 @@ import { StyleSheet, Text, View } from "react-native";
 import {
   ActivityIndicator,
   Button,
-  FAB,
   Headline as Title,
   ProgressBar,
 } from "react-native-paper";
@@ -21,18 +20,15 @@ type QSProps = {
 
 export default function QuizScreen({ navigation }: QSProps) {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
+  const [answer, setAnswer] = useState("");
+  const correctAnswer = "TRUE";
 
   const { currentQuestionId, finished, isLoading, questionList } = useSelector(
     (state: RootState) => state.quiz
   );
 
   const handleNext = () => {
-    dispatch(nextQuestion(value === "T"));
-  };
-
-  const computeResults = () => {
-    navigation.navigate("Result");
+    dispatch(nextQuestion(answer === correctAnswer));
   };
 
   useEffect(() => {
@@ -56,22 +52,18 @@ export default function QuizScreen({ navigation }: QSProps) {
           />
           <QuestionComponent
             question={questionList[currentQuestionId]}
-            lastQuestion={currentQuestionId === questionList.length - 1}
-            isLoading={isLoading}
-            nextQuestion={handleNext}
-            value={value}
-            setValue={setValue}
-            computeResults={computeResults}
+            answer={answer}
+            setAnswer={setAnswer}
           />
           <Button
             style={styles.fab}
-            disabled={value === ""}
+            disabled={answer === ""}
             mode="contained"
             icon={lastQuestion ? "check" : "share"}
             onPress={() => {
-              setValue("");
+              setAnswer("");
               handleNext();
-              if (lastQuestion) computeResults();
+              if (lastQuestion) navigation.navigate("Result");
             }}
           >
             {lastQuestion ? "Finish" : "Continue"}

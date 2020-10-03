@@ -7,22 +7,14 @@ import { Card, Paragraph, RadioButton } from "react-native-paper";
 
 interface QCProps {
   question: Question;
-  isLoading: boolean;
-  lastQuestion: boolean;
-  nextQuestion: any;
-  value: string;
-  setValue: any;
-  computeResults: () => void;
+  answer: string;
+  setAnswer: any;
 }
 
 export default function QuestionComponent({
   question,
-  lastQuestion,
-  isLoading,
-  nextQuestion,
-  value,
-  setValue,
-  computeResults,
+  answer,
+  setAnswer,
 }: QCProps) {
   useEffect(() => {
     answers = shuffleArray(answers);
@@ -32,27 +24,28 @@ export default function QuestionComponent({
     <RadioButton.Item
       key={question?.incorrect_answers[0]}
       label={question?.incorrect_answers[0]}
-      value="F"
+      value="FALSE"
       labelStyle={styles.answer}
     />,
     <RadioButton.Item
       key={question?.correct_answer}
       label={question?.correct_answer}
       labelStyle={styles.answer}
-      value="T"
+      value="TRUE"
     />,
   ];
 
   return (
     <>
+      <Paragraph>{question?.category}</Paragraph>
       <Card style={styles.card}>
         <Card.Content style={styles.cardContent}>
           <Paragraph style={styles.question}>
             {Html5Entities.decode(question?.question)}
           </Paragraph>
           <RadioButton.Group
-            onValueChange={(value) => setValue(value)}
-            value={value}
+            onValueChange={(value) => setAnswer(value)}
+            value={answer}
           >
             {answers.map((answer) => answer)}
           </RadioButton.Group>
