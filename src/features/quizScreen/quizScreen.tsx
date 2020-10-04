@@ -2,8 +2,8 @@ import QuestionComponent from "@components/questionComponent";
 import { RootStackList } from "@constants/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, Easing, StyleSheet, Text, View } from "react-native";
 import {
   ActivityIndicator,
   Button,
@@ -35,6 +35,17 @@ export default function QuizScreen({ navigation }: QSProps) {
     if (finished) dispatch(fetchQuestions());
   }, []);
 
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 500,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+  }, [currentQuestionId]);
+
   const lastQuestion = currentQuestionId === questionList.length - 1;
 
   return (
@@ -50,18 +61,25 @@ export default function QuizScreen({ navigation }: QSProps) {
             progress={(currentQuestionId + 1) / questionList.length}
             style={styles.progressBar}
           />
-          <QuestionComponent
-            question={questionList[currentQuestionId]}
-            answer={answer}
-            setAnswer={setAnswer}
-          />
+          <Animated.View
+            style={{
+              opacity: fadeAnim,
+            }}
+          >
+            <QuestionComponent
+              question={questionList[currentQuestionId]}
+              answer={answer}
+              setAnswer={setAnswer}
+            />
+          </Animated.View>
           <Button
-            style={styles.fab}
+            style={{ marginTop: 24 }}
             disabled={answer === ""}
             mode="contained"
             icon={lastQuestion ? "check" : "share"}
             onPress={() => {
               setAnswer("");
+              fadeAnim.setValue(0);
               handleNext();
               if (lastQuestion) navigation.navigate("Result");
             }}
@@ -86,8 +104,5 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     marginBottom: 24,
-  },
-  fab: {
-    margin: 24,
   },
 });

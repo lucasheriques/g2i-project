@@ -1,10 +1,12 @@
 import { quizSvg } from "@constants/strings";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { RootState } from "@store/rootReducer";
 import LottieView from "lottie-react-native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Headline, Subheading } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
+import { useSelector } from "react-redux";
 
 import { RootStackList } from "../../constants/types";
 
@@ -13,6 +15,8 @@ type HSProps = {
 };
 
 export default function HomeScreen({ navigation }: HSProps) {
+  const { finished } = useSelector((state: RootState) => state.quiz);
+
   return (
     <View style={styles.container}>
       <View>
@@ -33,7 +37,7 @@ export default function HomeScreen({ navigation }: HSProps) {
         contentStyle={{ height: 64 }}
         labelStyle={{ fontSize: 24 }}
       >
-        Begin
+        {finished ? "Begin" : "Continue"}
       </Button>
     </View>
   );
