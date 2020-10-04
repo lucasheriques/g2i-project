@@ -3,7 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
 import LottieView from "lottie-react-native";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Button, Headline, Subheading } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 import { useSelector } from "react-redux";
@@ -20,6 +20,16 @@ export default function HomeScreen({ navigation }: HSProps) {
   return (
     <View style={styles.container}>
       <View>
+        {Platform.OS === "ios" ? (
+          <LottieView
+            source={require("@assets/quiz.json")}
+            autoPlay
+            loop={false}
+            style={{ height: 250 }}
+          />
+        ) : (
+          ""
+        )}
         <Headline style={styles.title}>
           Welcome to the Trivia Challenge!
         </Headline>
