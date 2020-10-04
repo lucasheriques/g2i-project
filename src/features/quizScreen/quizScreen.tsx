@@ -3,7 +3,7 @@ import { RootStackList } from "@constants/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
 import React, { useEffect, useRef, useState } from "react";
-import { Animated, Easing, StyleSheet, Text, View } from "react-native";
+import { Animated, Easing, StyleSheet, View } from "react-native";
 import {
   ActivityIndicator,
   Button,

@@ -1,11 +1,9 @@
-import { quizSvg } from "@constants/strings";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
 import LottieView from "lottie-react-native";
 import React from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { Image, Platform, StyleSheet, View } from "react-native";
 import { Button, Headline, Subheading } from "react-native-paper";
-import { SvgXml } from "react-native-svg";
 import { useSelector } from "react-redux";
 
 import { RootStackList } from "../../constants/types";
@@ -25,10 +23,13 @@ export default function HomeScreen({ navigation }: HSProps) {
             source={require("@assets/quiz.json")}
             autoPlay
             loop={false}
-            style={{ height: 250 }}
+            style={styles.iosLogo}
           />
         ) : (
-          ""
+          <Image
+            style={styles.androidLogo}
+            source={require("@assets/quizLogo.png")}
+          />
         )}
         <Headline style={styles.title}>
           Welcome to the Trivia Challenge!
@@ -76,11 +77,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 8,
   },
-  curvedBackground: {
-    width: "100%",
-    minHeight: "100%",
-    color: "#fff",
-    alignItems: "center",
-    justifyContent: "space-evenly",
+  iosLogo: {
+    height: 250,
+  },
+  androidLogo: {
+    height: 250,
+    resizeMode: "contain",
   },
 });

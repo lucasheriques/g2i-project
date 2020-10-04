@@ -4,8 +4,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
 import { Html5Entities } from "html-entities";
 import React from "react";
-import { BackHandler, StyleSheet, Text, ScrollView } from "react-native";
-import { Button, Headline, List, Subheading } from "react-native-paper";
+import { BackHandler, StyleSheet, ScrollView } from "react-native";
+import { Button, List } from "react-native-paper";
 import { useSelector } from "react-redux";
 
 type RSProps = {
