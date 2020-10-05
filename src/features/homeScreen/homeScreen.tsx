@@ -3,7 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
 import LottieView from "lottie-react-native";
 import React from "react";
-import { Image, Platform, ScrollView, StyleSheet, View } from "react-native";
+import { Platform, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Headline, Subheading } from "react-native-paper";
 import { useSelector } from "react-redux";
 
@@ -78,9 +78,5 @@ const styles = StyleSheet.create({
   },
   iosLogo: {
     height: 250,
-  },
-  androidLogo: {
-    height: 250,
-    resizeMode: "contain",
   },
 });

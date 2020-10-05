@@ -7,7 +7,7 @@ After the last question is answered, the user will see his score and what the qu
 
 ## Quick start
 
-Pre-requiste: install the [Expo CLI](https://docs.expo.io/workflow/expo-cli/).
+Prerequiste: install the [Expo CLI](https://docs.expo.io/workflow/expo-cli/).
 
 1. Clone the project.
 
@@ -36,7 +36,7 @@ You can also just download the Expo app in your smartphone, and run from the pub
 - [Expo](https://docs.expo.io/)
 - [TypeScript](https://www.typescriptlang.org/docs/)
 - [React Navigation v5](https://reactnavigation.org/docs/getting-started)
-- [Redux, using Redux Toolkit implementation](https://redux-toolkit.js.org/). Also using Redux Thunks for API calls and redux-logger for debugging.
+- [Redux, using Redux Toolkit implementation](https://redux-toolkit.js.org/). Also using Redux Thunks for API calls and redux-logger for debugging
 - [Lottie (for iOS logo)](https://github.com/react-native-community/lottie-react-native)
 - [ESLint](https://eslint.org/docs/user-guide/getting-started) and [Prettier](https://prettier.io/)
 - [Open TDB API](https://opentdb.com/api_config.php)
