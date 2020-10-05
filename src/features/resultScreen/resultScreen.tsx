@@ -1,8 +1,8 @@
+import AnswersComponent from "@components/answersComponent";
 import { RootStackList } from "@constants/types";
 import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
-import { Html5Entities } from "html-entities";
 import React from "react";
 import { BackHandler, StyleSheet, ScrollView } from "react-native";
 import { Button, List } from "react-native-paper";
@@ -35,35 +35,20 @@ export default function ResultScreen({ navigation }: RSProps) {
     correctAnswers[questionId];
 
   return (
-    <ScrollView style={styles.container}>
-      <List.Section
-        title={`You scored ${score}/10!`}
-        titleStyle={styles.listTitle}
-        style={styles.listSection}
+    <ScrollView>
+      <AnswersComponent
+        score={score}
+        questionList={questionList}
+        correctAnswers={correctAnswers}
+      />
+      <Button
+        icon="redo-variant"
+        mode="contained"
+        onPress={() => navigation.navigate("Home")}
+        style={styles.tryAgainButton}
       >
-        {questionList.map((question, index) => (
-          <List.Item
-            key={index}
-            title={`Question 0${index + 1}`}
-            description={Html5Entities.decode(question.question)}
-            left={(props) => (
-              <List.Icon
-                {...props}
-                color={checkAnswer(index) ? "#18981D" : "#C52707"}
-                icon={checkAnswer(index) ? "check" : "close"}
-              />
-            )}
-          />
-        ))}
-        <Button
-          icon="redo-variant"
-          mode="contained"
-          onPress={() => navigation.navigate("Home")}
-          style={styles.tryAgainButton}
-        >
-          Play again!
-        </Button>
-      </List.Section>
+        Play again!
+      </Button>
     </ScrollView>
   );
 }
@@ -76,16 +61,8 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: 0,
   },
-  listTitle: {
-    fontSize: 24,
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#3E4C59",
-  },
-  listSection: {
-    minWidth: "100%",
-  },
+
   tryAgainButton: {
-    marginBottom: 32,
+    margin: 16,
   },
 });

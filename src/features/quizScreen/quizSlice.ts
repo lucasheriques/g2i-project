@@ -1,11 +1,12 @@
 import { getQuestions, Question } from "@api/openTdbAPI";
+import { CorrectAnswers } from "@constants/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "@store/store";
 
 interface Quiz {
   questionList: Question[];
   currentQuestionId: number;
-  correctAnswers: { [questionId: number]: boolean };
+  correctAnswers: CorrectAnswers;
   finished: boolean;
 }
 

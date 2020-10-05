@@ -27,7 +27,7 @@ $ yarn install # feel free to use npm instead
 $ expo start
 ```
 
-You can also just downloadthe Expo app in your smartphone, and run it from the published project:
+You can also just download the Expo app in your smartphone, and run from the published project:
 [here's the link](https://expo.io/@lucasheriques/g2i-project).
 
 ## Technologies used

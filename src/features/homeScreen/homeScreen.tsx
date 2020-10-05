@@ -1,8 +1,9 @@
+import QuizLogo from "@assets/quizLogo.svg";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
 import LottieView from "lottie-react-native";
 import React from "react";
-import { Image, Platform, StyleSheet, View } from "react-native";
+import { Image, Platform, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Headline, Subheading } from "react-native-paper";
 import { useSelector } from "react-redux";
 
@@ -16,7 +17,7 @@ export default function HomeScreen({ navigation }: HSProps) {
   const { finished } = useSelector((state: RootState) => state.quiz);
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View>
         {Platform.OS === "ios" ? (
           <LottieView
@@ -26,13 +27,11 @@ export default function HomeScreen({ navigation }: HSProps) {
             style={styles.iosLogo}
           />
         ) : (
-          <Image
-            style={styles.androidLogo}
-            source={require("@assets/quizLogo.png")}
-          />
+          <QuizLogo height={250} />
         )}
         <Headline style={styles.title}>
-          Welcome to the Trivia Challenge!
+          Welcome to the {"\n"}
+          Trivia Challenge!
         </Headline>
       </View>
       <Subheading style={styles.subtitle}>
@@ -50,7 +49,7 @@ export default function HomeScreen({ navigation }: HSProps) {
       >
         {finished ? "Begin" : "Continue"}
       </Button>
-    </View>
+    </ScrollView>
   );
 }
 

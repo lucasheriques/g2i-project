@@ -13,6 +13,8 @@ export type Question = {
   incorrect_answers: string[];
 };
 
+export type CorrectAnswers = { [questionId: number]: boolean };
+
 export type QuestionListState = {
   data: Question[] | null;
   isFetching: boolean;
