@@ -1,15 +1,15 @@
+import { CORRECT_ANSWER, WRONG_ANSWER } from "@constants/strings";
 import { Question } from "@constants/types";
 import { shuffleArray } from "@utils/arrays";
 import { Html5Entities } from "html-entities";
-import React, { useEffect, useRef } from "react";
-import { StyleSheet, Animated, View } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import { Card, Paragraph, RadioButton } from "react-native-paper";
-import { accessibilityProps } from "react-native-paper/lib/typescript/src/components/MaterialCommunityIcon";
 
 interface QCProps {
   question: Question;
   answer: string;
-  setAnswer: any;
+  setAnswer: (answer: string) => void;
 }
 export default function QuestionComponent({
   question,
@@ -24,14 +24,14 @@ export default function QuestionComponent({
     <RadioButton.Item
       key={question?.incorrect_answers[0] ?? "1"}
       label={question?.incorrect_answers[0]}
-      value="FALSE"
+      value={WRONG_ANSWER}
       labelStyle={styles.answer}
     />,
     <RadioButton.Item
       key={question?.correct_answer ?? "2"}
       label={question?.correct_answer}
       labelStyle={styles.answer}
-      value="TRUE"
+      value={CORRECT_ANSWER}
     />,
   ];
 

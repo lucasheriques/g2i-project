@@ -1,4 +1,5 @@
 import QuestionComponent from "@components/questionComponent";
+import { CORRECT_ANSWER } from "@constants/strings";
 import { RootStackList } from "@constants/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootState } from "@store/rootReducer";
@@ -21,14 +22,13 @@ type QSProps = {
 export default function QuizScreen({ navigation }: QSProps) {
   const dispatch = useDispatch();
   const [answer, setAnswer] = useState("");
-  const correctAnswer = "TRUE";
 
   const { currentQuestionId, finished, isLoading, questionList } = useSelector(
     (state: RootState) => state.quiz
   );
 
   const handleNext = () => {
-    dispatch(nextQuestion(answer === correctAnswer));
+    dispatch(nextQuestion(answer === CORRECT_ANSWER));
   };
 
   useEffect(() => {

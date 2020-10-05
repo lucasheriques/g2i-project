@@ -3,7 +3,7 @@ import { CorrectAnswers, Question } from "@constants/types";
 import { Html5Entities } from "html-entities";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { List, Text } from "react-native-paper";
+import { List } from "react-native-paper";
 
 interface ACProps {
   score: number;
